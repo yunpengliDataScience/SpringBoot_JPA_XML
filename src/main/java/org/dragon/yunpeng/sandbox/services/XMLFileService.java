@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.dragon.yunpeng.sandbox.entities.FormList;
+import org.dragon.yunpeng.sandbox.pojos.RootElement;
 import org.springframework.stereotype.Service;
 
 @Service(value = "xmlFileService")
@@ -28,5 +29,23 @@ public class XMLFileService {
 		}
 
 		return formList;
+	}
+
+	public RootElement unmarshallXMLToRootElement(String filePath) {
+		RootElement root = null;
+
+		// Unmarshal XML string into a Form object
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(RootElement.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			root = (RootElement) unmarshaller.unmarshal(new File(filePath));
+
+			System.out.println(root);
+		} catch (JAXBException e) {
+
+			e.printStackTrace();
+		}
+
+		return root;
 	}
 }

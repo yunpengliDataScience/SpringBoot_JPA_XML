@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Root>
+    <Book>
+        <id>1</id>
+        <title>Titile 1</title>
+        <author>Yunpeng Li</author>
+        <isbn>ABCD1</isbn>
+        <libraryID>1</libraryID>
+    </Book>
+    <Book>
+        <id>2</id>
+        <title>Titile 2</title>
+        <author>Yunpeng Li</author>
+        <isbn>ABCD2</isbn>
+        <libraryID>1</libraryID>
+    </Book>
+    <Book>
+        <id>3</id>
+        <title>Titile 3</title>
+        <author>Yunpeng Li</author>
+        <isbn>ABCD3</isbn>
+        <libraryID>1</libraryID>
+    </Book>
+    <Book>
+        <id>4</id>
+        <title>Titile 4</title>
+        <author>Cliff Li</author>
+        <isbn>ABCD4</isbn>
+        <libraryID>2</libraryID>
+    </Book>
+    <Book>
+        <id>5</id>
+        <title>Titile 5</title>
+        <author>Cliff Li</author>
+        <isbn>ABCD5</isbn>
+        <libraryID>2</libraryID>
+    </Book>
+    <Book>
+        <id>6</id>
+        <title>Titile 3</title>
+        <author>Cliff Li</author>
+        <isbn>ABCD6</isbn>
+        <libraryID>2</libraryID>
+    </Book>
+</Root>
