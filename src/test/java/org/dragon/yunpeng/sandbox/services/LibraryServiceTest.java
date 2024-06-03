@@ -7,8 +7,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
-
 import org.dragon.yunpeng.sandbox.entities.Book;
 import org.dragon.yunpeng.sandbox.entities.Library;
 import org.junit.jupiter.api.Test;

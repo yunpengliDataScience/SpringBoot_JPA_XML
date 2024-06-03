@@ -37,7 +37,7 @@
     </Book>
     <Book>
         <id>6</id>
-        <title>Titile 3</title>
+        <title>Titile 6</title>
         <author>Cliff Li</author>
         <isbn>ABCD6</isbn>
         <libraryID>2</libraryID>

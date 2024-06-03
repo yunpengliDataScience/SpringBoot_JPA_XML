@@ -1,5 +1,7 @@
 package org.dragon.yunpeng.sandbox.services;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,17 +12,16 @@ public class XMLFileServiceTest {
 	@Autowired
 	private XMLFileService xmlFileService;
 
-	// @Test
-	public void testUnmarshallXMLOld() {
-		xmlFileService.unmarshallXML("C:\\Projects\\SpringBoot_JPA_XML\\sampleXMLs\\formList1.xml");
-
-		xmlFileService.unmarshallXML("C:\\Projects\\SpringBoot_JPA_XML\\sampleXMLs\\formList2.xml");
-	}
-
 	@Test
 	public void testUnmarshallXML() {
-		xmlFileService.unmarshallXMLToRootElement("C:\\Projects\\SpringBoot_JPA_XML\\sampleXMLs\\LibraryList.xml");
 
-		xmlFileService.unmarshallXMLToRootElement("C:\\Projects\\SpringBoot_JPA_XML\\sampleXMLs\\BookList.xml");
+		String workingDirectory = System.getProperty("user.dir");
+		System.out.println("workingDirectory=" + workingDirectory);
+
+		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
+
+		xmlFileService.unmarshallXMLToRootElement(fileDirectory + "LibraryList.xml");
+
+		xmlFileService.unmarshallXMLToRootElement(fileDirectory + "BookList.xml");
 	}
 }
