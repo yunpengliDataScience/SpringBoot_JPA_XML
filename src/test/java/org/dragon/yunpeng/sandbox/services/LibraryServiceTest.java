@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.dragon.yunpeng.sandbox.entities.Book;
 import org.dragon.yunpeng.sandbox.entities.Library;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,17 +20,35 @@ public class LibraryServiceTest {
 
 	@Autowired
 	private LibraryService libraryService;
+	
+	@Autowired
+    private H2DatabaseUtil h2DatabaseUtil;
 
+	@BeforeEach
+    public void setUp() {
+		//Disable constraints in H2 database before each test.
+        h2DatabaseUtil.disableConstraints();
+    }
+	
+	@AfterEach
+    public void tearDown() {
+		//Enable constraints in H2 database before each test.
+        h2DatabaseUtil.enableConstraints();
+    }
+	
 	@Test
 	public void testSaveDataFromXML() {
 
+		h2DatabaseUtil.disableConstraints();
+		
 		String workingDirectory = System.getProperty("user.dir");
 		System.out.println("workingDirectory=" + workingDirectory);
 
 		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
-		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
-
+		
 		libraryService.saveBookListFromXML(fileDirectory + "BookList.xml");
+		
+		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
 	}
 
 	// @Test
