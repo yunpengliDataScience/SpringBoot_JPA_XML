@@ -18,37 +18,45 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class LibraryServiceTest {
 
+	private String workingDirectory;
+
 	@Autowired
 	private LibraryService libraryService;
-	
+
 	@Autowired
-    private H2DatabaseUtil h2DatabaseUtil;
+	private H2DatabaseUtil h2DatabaseUtil;
 
 	@BeforeEach
-    public void setUp() {
-		//Disable constraints in H2 database before each test.
-        h2DatabaseUtil.disableConstraints();
-    }
-	
+	public void setUp() {
+		workingDirectory = System.getProperty("user.dir");
+		System.out.println("workingDirectory=" + workingDirectory);
+
+		// Disable constraints in H2 database before each test.
+		h2DatabaseUtil.disableConstraints();
+	}
+
 	@AfterEach
-    public void tearDown() {
-		//Enable constraints in H2 database before each test.
-        h2DatabaseUtil.enableConstraints();
-    }
-	
+	public void tearDown() {
+		// Enable constraints in H2 database before each test.
+		h2DatabaseUtil.enableConstraints();
+	}
+
 	@Test
 	public void testSaveDataFromXML() {
 
 		h2DatabaseUtil.disableConstraints();
-		
-		String workingDirectory = System.getProperty("user.dir");
-		System.out.println("workingDirectory=" + workingDirectory);
 
 		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
-		
+
 		libraryService.saveBookListFromXML(fileDirectory + "BookList.xml");
-		
+
 		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
+	}
+
+	@Test
+	public void testBackupDatabase() {
+		String backupFilePath = workingDirectory + File.separator + "databaseBackup" + File.separator + "backupDB.zip";
+		h2DatabaseUtil.backupDatabase(backupFilePath);
 	}
 
 	// @Test

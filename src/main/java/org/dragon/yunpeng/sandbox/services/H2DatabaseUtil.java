@@ -17,4 +17,11 @@ public class H2DatabaseUtil {
 	public void enableConstraints() {
 		jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY TRUE");
 	}
+
+	public void backupDatabase(String backupFilePath) {
+		String str = "BACKUP TO '%s'";
+		String sql = String.format(str, backupFilePath);
+
+		jdbcTemplate.execute(sql);
+	}
 }
