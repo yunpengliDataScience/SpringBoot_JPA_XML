@@ -11,11 +11,11 @@ public class H2DatabaseUtil {
 	private JdbcTemplate jdbcTemplate;
 
 	public void disableConstraints() {
-		jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY FALSE");
+		jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY FALSE;");
 	}
 
 	public void enableConstraints() {
-		jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY TRUE");
+		jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY TRUE;");
 	}
 
 	public void backupDatabase(String backupFilePath) {
@@ -23,5 +23,25 @@ public class H2DatabaseUtil {
 		String sql = String.format(str, backupFilePath);
 
 		jdbcTemplate.execute(sql);
+	}
+
+	public void disableAllTableConstraints(String[] tables) {
+
+		for (String tableName : tables) {
+			String stmt = "ALTER TABLE %s SET REFERENTIAL_INTEGRITY FALSE;";
+			String sql = String.format(stmt, tableName);
+
+			jdbcTemplate.execute(sql);
+		}
+	}
+
+	public void checkDataIntegrity(String[] tables) {
+
+		for (String tableName : tables) {
+			String stmt = "ALTER TABLE %s SET REFERENTIAL_INTEGRITY TRUE CHECK;";
+			String sql = String.format(stmt, tableName);
+
+			jdbcTemplate.execute(sql);
+		}
 	}
 }

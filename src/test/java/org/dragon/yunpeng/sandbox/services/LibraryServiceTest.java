@@ -32,20 +32,25 @@ public class LibraryServiceTest {
 		System.out.println("workingDirectory=" + workingDirectory);
 
 		// Disable constraints in H2 database before each test.
-		h2DatabaseUtil.disableConstraints();
+		//h2DatabaseUtil.disableConstraints();
 	}
 
 	@AfterEach
 	public void tearDown() {
 		// Enable constraints in H2 database before each test.
-		h2DatabaseUtil.enableConstraints();
+		//h2DatabaseUtil.enableConstraints();
 	}
 
 	@Test
+	public void testsaveEntitiesFromXmls() {
+		libraryService.saveEntitiesFromXmls();
+	}
+	
+	//@Test
 	public void testSaveDataFromXML() {
 
 		h2DatabaseUtil.disableConstraints();
-
+		
 		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
 
 		libraryService.saveBookListFromXML(fileDirectory + "BookList.xml");
