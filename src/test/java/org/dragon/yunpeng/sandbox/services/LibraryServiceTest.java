@@ -42,7 +42,7 @@ public class LibraryServiceTest {
 	}
 
 	@Test
-	public void testsaveEntitiesFromXmls() {
+	public void testSaveEntitiesFromXmls() {
 		libraryService.saveEntitiesFromXmls();
 	}
 	
