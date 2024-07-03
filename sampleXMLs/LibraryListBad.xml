@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Root>
+    <Library><a>
+        <id>1</id>
+        <name>Library 1</name>
+    </Library>
+    <Library>
+        <id>2</id>
+        <name>Library 2</name>
+    </Library>
+</Root>

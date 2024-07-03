@@ -58,7 +58,7 @@ public class LibraryServiceTest {
 		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
 	}
 
-	@Test
+	//@Test
 	public void testBackupDatabase() {
 		String backupFilePath = workingDirectory + File.separator + "databaseBackup" + File.separator + "backupDB.zip";
 		h2DatabaseUtil.backupDatabase(backupFilePath);

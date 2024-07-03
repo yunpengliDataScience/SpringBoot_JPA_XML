@@ -47,6 +47,8 @@ public class LibraryService {
 
 	// @Transactional
 	public void saveLibraryListFromXML(String filePath) {
+		libraryRepository.deleteAll();
+		
 		RootElement root = xmlFileService.unmarshallXMLToRootElement(filePath);
 
 		for (Library library : root.getLibraryList()) {
@@ -56,6 +58,9 @@ public class LibraryService {
 
 	// @Transactional
 	public void saveBookListFromXML(String filePath) {
+		
+		bookRepository.deleteAll();
+		
 		RootElement root = xmlFileService.unmarshallXMLToRootElement(filePath);
 
 		for (Book book : root.getBookList()) {
@@ -77,8 +82,9 @@ public class LibraryService {
 		
 		saveBookListFromXML(fileDirectory + "BookList.xml");
 		//saveBookListFromXML(fileDirectory + "BookListBad.xml");
-		saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
+		saveLibraryListFromXML(fileDirectory + "LibraryListBad.xml");
 		
+		//throw new RuntimeException("failure!");
 		//TODO: re-enable constraints outside the transaction.
 		//h2DatabaseUtil.enableConstraints();
 

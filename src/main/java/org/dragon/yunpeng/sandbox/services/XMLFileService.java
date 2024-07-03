@@ -38,7 +38,7 @@ public class XMLFileService {
 			System.out.println(root);
 		} catch (JAXBException e) {
 
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 		return root;
