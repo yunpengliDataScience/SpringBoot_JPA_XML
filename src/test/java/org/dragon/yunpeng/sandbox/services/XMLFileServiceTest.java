@@ -13,6 +13,19 @@ public class XMLFileServiceTest {
 	private XMLFileService xmlFileService;
 
 	@Test
+	public void tesMarshallToXML() {
+
+		String workingDirectory = System.getProperty("user.dir");
+		System.out.println("workingDirectory=" + workingDirectory);
+
+		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
+
+		xmlFileService.marshallBooksToXML(fileDirectory + "BookListLarge.xml", 200000);
+
+		xmlFileService.marshallLibrarysToXML(fileDirectory + "LibraryListLarge.xml", 200000);
+	}
+
+	// @Test
 	public void testUnmarshallXML() {
 
 		String workingDirectory = System.getProperty("user.dir");

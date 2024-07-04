@@ -4,15 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.dragon.yunpeng.sandbox.entities.Book;
+import org.dragon.yunpeng.sandbox.entities.Library;
 import org.dragon.yunpeng.sandbox.pojos.RootElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +38,8 @@ public class XMLFileService {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(RootElement.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+			unmarshaller.setEventHandler(new XmlParseValidationEventHandler());
 			root = (RootElement) unmarshaller.unmarshal(new File(filePath));
 
 			System.out.println(root);
@@ -42,6 +49,83 @@ public class XMLFileService {
 		}
 
 		return root;
+	}
+
+	public void marshallBooksToXML(String filePath, int numOfRecords) {
+
+		RootElement root = new RootElement();
+
+		List<Book> bookList = new ArrayList<Book>();
+
+		for (long i = 1; i <= numOfRecords; i++) {
+			Book book = new Book();
+			book.setId(i);
+			book.setAuthor("Cliff Lee");
+			book.setIsbn("ABCD" + i);
+			book.setTitle("Title " + i);
+			book.setLibraryID(1l);
+
+			bookList.add(book);
+		}
+
+		root.setBookList(bookList);
+
+		try {
+			JAXBContext context = JAXBContext.newInstance(RootElement.class);
+
+			// Create Marshaller
+			Marshaller marshaller = context.createMarshaller();
+
+			// To make the XML output pretty
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			// Marshal the object to the console
+			// marshaller.marshal(root, System.out);
+
+			// Marshal the Library object to a file
+			marshaller.marshal(root, new File(filePath));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void marshallLibrarysToXML(String filePath, int numOfRecords) {
+
+		RootElement root = new RootElement();
+
+		List<Library> libraryList = new ArrayList<Library>();
+
+		for (long i = 1; i <= numOfRecords; i++) {
+			Library library = new Library();
+			library.setId(i);
+			library.setName("My Library " + i);
+
+			libraryList.add(library);
+		}
+
+		root.setLibraryList(libraryList);
+
+		try {
+			JAXBContext context = JAXBContext.newInstance(RootElement.class);
+
+			// Create Marshaller
+			Marshaller marshaller = context.createMarshaller();
+
+			// To make the XML output pretty
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			// Marshal the object to the console
+			// marshaller.marshal(root, System.out);
+
+			// Marshal the Library object to a file
+			marshaller.marshal(root, new File(filePath));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public RootElement unmarshallXMLToRootElement(InputStream xmlInputStream) {

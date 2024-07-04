@@ -45,26 +45,28 @@ public class LibraryService {
 		return libraryRepository.findById(id).orElse(null);
 	}
 
-	// @Transactional
+	@Transactional
 	public void saveLibraryListFromXML(String filePath) {
 		libraryRepository.deleteAll();
-		
+
 		RootElement root = xmlFileService.unmarshallXMLToRootElement(filePath);
 
 		for (Library library : root.getLibraryList()) {
-			saveLibrary(library);
+			// saveLibrary(library);
+			libraryRepository.save(library);
 		}
 	}
 
-	// @Transactional
+	@Transactional
 	public void saveBookListFromXML(String filePath) {
-		
+
 		bookRepository.deleteAll();
-		
+
 		RootElement root = xmlFileService.unmarshallXMLToRootElement(filePath);
 
 		for (Book book : root.getBookList()) {
-			saveBook(book);
+			// saveBook(book);
+			bookRepository.save(book);
 		}
 	}
 
@@ -75,19 +77,19 @@ public class LibraryService {
 		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
 
 		String[] tables = { "Book", "Library" };
-		
-		//h2DatabaseUtil.disableAllTableConstraints(tables);
-		
-		h2DatabaseUtil.disableConstraints();
-		
-		saveBookListFromXML(fileDirectory + "BookList.xml");
-		//saveBookListFromXML(fileDirectory + "BookListBad.xml");
-		saveLibraryListFromXML(fileDirectory + "LibraryListBad.xml");
-		
-		//throw new RuntimeException("failure!");
-		//TODO: re-enable constraints outside the transaction.
-		//h2DatabaseUtil.enableConstraints();
 
-		//h2DatabaseUtil.checkDataIntegrity(tables);
+		// h2DatabaseUtil.disableAllTableConstraints(tables);
+
+		h2DatabaseUtil.disableConstraints();
+
+		saveBookListFromXML(fileDirectory + "BookList.xml");
+		// saveBookListFromXML(fileDirectory + "BookListBad.xml");
+		saveLibraryListFromXML(fileDirectory + "LibraryListBad.xml");
+
+		// throw new RuntimeException("failure!");
+		// TODO: re-enable constraints outside the transaction.
+		// h2DatabaseUtil.enableConstraints();
+
+		// h2DatabaseUtil.checkDataIntegrity(tables);
 	}
 }
