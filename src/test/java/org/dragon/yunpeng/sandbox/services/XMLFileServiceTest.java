@@ -20,9 +20,9 @@ public class XMLFileServiceTest {
 
 		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
 
-		xmlFileService.marshallBooksToXML(fileDirectory + "BookListLarge.xml", 200000);
+		xmlFileService.marshallBooksToXML(fileDirectory + "BookListLarge.xml", 2000000);
 
-		xmlFileService.marshallLibrarysToXML(fileDirectory + "LibraryListLarge.xml", 200000);
+		xmlFileService.marshallLibrarysToXML(fileDirectory + "LibraryListLarge.xml", 2000000);
 	}
 
 	// @Test
