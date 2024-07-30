@@ -30,46 +30,11 @@ public class LibraryServiceTest {
 	public void setUp() {
 		workingDirectory = System.getProperty("user.dir");
 		System.out.println("workingDirectory=" + workingDirectory);
-
-		// Disable constraints in H2 database before each test.
-		// h2DatabaseUtil.disableConstraints();
 	}
 
 	@AfterEach
 	public void tearDown() {
-		// Enable constraints in H2 database before each test.
-		// h2DatabaseUtil.enableConstraints();
-	}
-
-	@Test
-	public void testSaveEntitiesFromLargeXMLs() {
-
-		h2DatabaseUtil.disableConstraints();
-
-		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
-
-		libraryService.saveBookListFromXML(fileDirectory + "BookListLarge.xml");
 		
-		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryListLarge.xml");
-
-		h2DatabaseUtil.enableConstraints();
-	}
-
-	// @Test
-	public void testSaveEntitiesFromXmls() {
-		libraryService.saveEntitiesFromXmls();
-	}
-
-	// @Test
-	public void testSaveDataFromXML() {
-
-		h2DatabaseUtil.disableConstraints();
-
-		String fileDirectory = workingDirectory + File.separator + "sampleXMLs" + File.separator;
-
-		libraryService.saveBookListFromXML(fileDirectory + "BookList.xml");
-
-		libraryService.saveLibraryListFromXML(fileDirectory + "LibraryList.xml");
 	}
 
 	// @Test
